@@ -12,7 +12,10 @@
     <!--header of the document-->
     <header>
     <h1>POP-QUIZ!</h1>
-    <p>Click the Start button below to begin.</p>
+    <div id="quizTimerContainer">
+    <p id="messageToStart">Click the Start button below to begin.</p>
+    <p id="quizText"><span id="quizValue"></span></p>
+    </div>
     </header>
 
     <!--blank section to provide space between the header and button-->
@@ -31,8 +34,13 @@
 
     <!--questions to put up on the screen when called upon, just put this up so we can use it later-->
     <div id="questionsContainer">
-    <p id="questions">question 1 remove this text from HTML form when done</p>
-    <p id="answers"></p>
+    <p id="questionElement"></p>
+    <p id="answerElement"></p>
+    </div>
+
+    <div id = "scoreboard">
+    <p id="user name"><span></span></p>
+    <p></p>
     </div>
 
     <!--bringing in the javascript for the html to find-->
