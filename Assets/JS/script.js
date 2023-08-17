@@ -21,8 +21,9 @@
   //Click start button message loacted in header will disapear//
   var messageToStart = document.getElementById("messageToStart");
 
-  //How to end the game prematurely//
-  var endGame = document.getElementById("endGame");
+ //scorecard at end of quiz//
+  var formContainer = document.getElementById("formContainer");
+  var formElement = document.getElementById("formElement");
 }
 
 //questions that will be put up on the screen for the
@@ -95,8 +96,6 @@ function renderAnswers() {
     var choiceButton = document.createElement("button");
     choiceButton.textContent = question.choices[i];
 
-    //console.log(questions[i].correctAnswer);//just to see what it logs//
-
     choiceButton.addEventListener("click", function (event) {
       checkAnswer(event.target.textContent);
     });
@@ -109,9 +108,17 @@ function renderAnswers() {
 function generateQuestion() {
   var question = questions[index];
   questionElement.style.display = "block";
-  questionElement.textContent = question.text;
-  console.log(question.text);
-  renderAnswers();
+
+  if(index === questions.length)
+  {
+    quizFinished();
+  }
+    else
+    {
+      questionElement.textContent = question.text;
+      renderAnswers();
+    }
+
 }
 
 //DONE
@@ -132,26 +139,29 @@ function quizCounter() {
 }
 
 //need to figure out why display is hidden and not coming out.//
-function endGameButton() {
-  var choiceButton = document.createElement("button");
-  choiceButton.textContent = endGame.textContent;
-  endGame.style.display = "block";
+function quizFinished() {
+  //scorecard goes in here!!!
+  questionElement.style.display = "none";
+  answerElement.style.display = 'none';
+  quizTimerContainer.style.display = 'none';
+  questionsContainer.style.display = 'none';
 
-  choiceButton.addEventListener("click", function () {
-    choiceButton = startQuiz();
-  });
+  formContainer.style.display = 'block';
+  formElement.style.display = 'block';
+
+  var results = formElement.textContent;
+  results = "GOOD JOB ON FINISHING!!!"
 }
 
 function checkAnswer(selectedAnswer) {
   let question = questions[index];
   if (selectedAnswer === question.choices[question.correctAnswer]) {
     score += 5;
-    quizValue += 10;
     //console.log(score);
     console.log("Correct Answer!");
   } else {
     score -= 5;
-    quizValue -= 20;
+    quizValue -= 30;
     //console.log(score);
     console.log("Wrong Answer!");
   }
