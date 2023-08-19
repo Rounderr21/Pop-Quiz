@@ -1,144 +1,155 @@
-*{
-    background-color: rgb(66, 64, 64);
+/* * is used to make the color of the background a dark color.*/
+* {
+  background-color: rgb(66, 64, 64);
+}
+/*header element properties that make the children follow suit.*/
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 400x;
+  background-color: yellow;
+  position: relative;
+  text-align: center;
+}
+header h1 {
+  flex-wrap: wrap;
+  position: relative;
+  flex-direction: column;
+  font-size: 100px;
+  font-weight: bolder;
+  background-color: yellow;
 }
 
-header{
-
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 400x;
-    background-color: yellow;
-    position: relative;
-    text-align: center;
-    
+header div {
+  background-color: yellow;
 }
-header h1{
-    
-    flex-wrap: wrap;
-    position: relative;
-    flex-direction: column;
-    font-size: 100px;
-    font-weight: bolder;
-    background-color: yellow;
+header p {
+  flex-wrap: wrap;
+  position: relative;
+  flex-direction: column;
+  font-size: 25px;
+  font-weight: bolder;
+  background-color: yellow;
+  text-decoration: underline;
 }
-
-header div{
-    background-color: yellow;
+header #quizText,
+#quizValue {
+  text-decoration: none;
+  font-size: 50px;
+  color: red;
 }
-header p{
-
-    flex-wrap: wrap;
-    position: relative;
-    flex-direction: column;
-    font-size: 25px;
-    font-weight: bolder;
-    background-color: yellow;
-    text-decoration: underline;
+/*parent element that makes children obay.*/
+div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }
-header #quizText, #quizValue{
-    text-decoration: none;
-    font-size: 50px;
-    color: red;
-
-}
-section{
-
-    height: 200px;
-}
-div{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-}
-
+/*all button properties on this website.*/
 button {
-
-    flex-wrap: wrap;
-    position: relative;
-    flex-direction: row;
-    text-decoration: 10px underline red;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 200px;
-    background-color: yellow;
-    color: black;
-    border: 10px solid black;
-    border-radius: 65px;
-
-  }
-  button:hover{
-    background-color: green;
-    text-decoration: none;
-  }
-  button:active{
-    background-color: red;
-    text-decoration: none;
-    transform: scale(0.95);
-  }
-
+  flex-wrap: wrap;
+  position: relative;
+  flex-direction: row;
+  text-decoration: 10px underline red;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 200px;
+  background-color: yellow;
+  color: black;
+  border: 10px solid black;
+  border-radius: 65px;
+}
+button:hover {
+  background-color: green;
+  text-decoration: none;
+}
+button:active {
+  background-color: red;
+  text-decoration: none;
+  transform: scale(0.95);
+}
 
 /* countdown id's are esablished in HTML and is used to make sure the coundown is set diplay into nothing until called upon in javascrpit.*/
-#countdownContainer{
-    display: none; /* used to make the container holding the text to dissapear until called upon in javascript.*/
-    width: 100%;
-    height: 250px;
-
+#countdownContainer {
+  display: none; /* used to make the container holding the text to dissapear until called upon in javascript.*/
+  width: 100%;
+  height: 250px;
 }
 
-#countdownText{
-    font-size: 110px;
-    color: red;
+#countdownText {
+  font-size: 110px;
+  color: red;
 }
-
 
 /* question id's are established in HTML and is used to pop up questions to user.*/
-#questionsContainer{
-
-    display: none; /* used to make the container holding the text to dissapear until called upon in javascript.*/
-    position: relative;
-    width: 100%;
-    height: 250px;
+#questionsContainer {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 250px;
 }
 
-#questionElement{
-   
-    display: none;
-    width: 100%;
-    height: 250px;
-    position: relative;
-    font-size: 50px;
-    color: red;
+#questionElement {
+  display: none;
+  width: 100%;
+  height: 150px;
+  position: relative;
+  font-size: 50px;
+  color: red;
 }
 
-#answerElement{
-
-    display: none;
-    position: relative;
-    
-
+#answerElement {
+  display: none;
+  position: relative;
+}
+/* form id's are established in HTML and is used to pop up form to user to input their initials and score.*/
+#formContainer {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-color: rgb(66, 64, 64);
+}
+#formElement {
+  text-align: center;
+  display: none;
+  width: 100%;
+  height: 250px;
+  position: relative;
+  font-size: 50px;
+  color: whitesmoke;
 }
 
-#endGame{
-
-    display: none;
-    position: relative;
-
+#input {
+  display: none;
+  color: white;
+  background-color: whitesmoke;
 }
-#formContainer{
-
-    display: none;
-    position: relative;
-    width: 100%;
-    height: 250px;
+#enterButton {
+  background-color: whitesmoke;
+  display: none;
+  justify-content: center;
+  margin-top: 80px;
 }
-#formElement{
+/* leaderboard id's are established in HTML and is used to pop up the scoreboard to user and erase and restart buttons.*/
+#leaderboard {
+  display: none;
+  font-size: 50px;
+  text-align: center;
+  height: 500px;
+  color: white;
+}
 
-    display: none;
-    width: 100%;
-    height: 250px;
-    position: relative;
-    font-size: 50px;
-    color: white;
+#results {
+  background-color: red;
+}
+
+.center-container {
+  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This makes the container take the full viewport height */
+  text-align: center; /* Center the text horizontally */
 }
