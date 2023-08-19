@@ -1,32 +1,38 @@
-{
-  //start button id's pulled from HTML//
-  var startButton = document.getElementById("startButton");
-  var startButtonContainer = document.getElementById("startButtonContainer");
+//start button id's pulled from HTML//
+var startButton = document.getElementById("startButton");
+var startButtonContainer = document.getElementById("startButtonContainer");
 
-  //ccountdown timer id's pulled from HTML//
-  var countdownContainer = document.getElementById("countdownContainer");
-  var countdownText = document.getElementById("countdownText");
-  var countdownValue = document.getElementById("countdownValue");
+//ccountdown timer id's pulled from HTML//
+var countdownContainer = document.getElementById("countdownContainer");
+var countdownText = document.getElementById("countdownText");
+var countdownValue = document.getElementById("countdownValue");
 
-  //question id's pulled from HTML//
-  var questionsContainer = document.getElementById("questionsContainer");
-  var questionElement = document.getElementById("questionElement");
-  var answerElement = document.getElementById("answerElement");
+//question id's pulled from HTML//
+var questionsContainer = document.getElementById("questionsContainer");
+var questionElement = document.getElementById("questionElement");
+var answerElement = document.getElementById("answerElement");
 
-  //quiztimer located in the header//
-  var quizTimerContainer = document.getElementById("quizTimerContainer");
-  var quizText = document.getElementById("quizText");
-  var quizValue = document.getElementById("quizValue");
+//quiztimer located in the header//
+var quizTimerContainer = document.getElementById("quizTimerContainer");
+var quizText = document.getElementById("quizText");
+var quizValue = document.getElementById("quizValue");
 
-  //Click start button message loacted in header will disapear//
-  var messageToStart = document.getElementById("messageToStart");
+//Click start button message loacted in header//
+var messageToStart = document.getElementById("messageToStart");
 
- //scorecard at end of quiz//
-  var formContainer = document.getElementById("formContainer");
-  var formElement = document.getElementById("formElement");
-}
+//getting initals and score at end of quiz//
+var formContainer = document.getElementById("formContainer");
+var formElement = document.getElementById("formElement");
+var input = document.getElementById("input");
+var enterButton = document.getElementById("enterButton");
 
-//questions that will be put up on the screen for the
+//scorecard for the end//
+var leaderboard = document.getElementById("leaderboard");
+var results = document.getElementById("results");
+var eraseButton = document.getElementById("erase");
+var restartButton = document.getElementById("restart");
+
+//questions that will be put up on the screen for the test. this is a variable that has an array of objects.//
 const questions = [
   {
     text: "1. What is 2 plus 2?",
@@ -52,10 +58,14 @@ const questions = [
     correctAnswer: 3,
   },
 ];
+
+//global variables so that all functions can access them//
 let score = 0;
 let index = 0;
-quizValue = 120;
+quizValue = 90;
 
+
+//startQuiz function is called and the quiz starts//
 startQuiz();
 
 function startQuiz() {
@@ -68,12 +78,14 @@ function startQuiz() {
 
       //makes start button disapear, and allows the countdown container to display//
       startButtonContainer.style.display = "none";
+      messageToStart.style.display = "none";
       countdownContainer.style.display = "block";
 
       //if statement makes it when countdown is at 0 it clears it and removes the countdown container from the screen.
       if (countdownValue < 0) {
         clearInterval(counter);
         countdownContainer.style.display = "none";
+        //once we clear the countdown timer, we start functions quizCounter and generateQuestion//
         generateQuestion();
         quizCounter();
       }
@@ -81,9 +93,8 @@ function startQuiz() {
   });
 }
 
-//function starts and put the question on the screen.
+//function starts and puts the answers in the questions array on the screen via for loop//
 function renderAnswers() {
-  messageToStart.style.display = "none";
 
   var question = questions[index];
 
@@ -100,71 +111,113 @@ function renderAnswers() {
       checkAnswer(event.target.textContent);
     });
 
+    //puts the answer buttons to the answerelement and displays
     answerElement.appendChild(choiceButton);
   }
 }
 
-//need to figue out how to put questions on page//
+//Function generates questions onto the page//
 function generateQuestion() {
   var question = questions[index];
   questionElement.style.display = "block";
 
-  if(index === questions.length)
-  {
+  //if statement is used to make sure every question in the array has been asked and calls renderAnswers fucntion, when all asked we end the quiz by calling quizFinished function//
+  if (index === questions.length) {
     quizFinished();
+    localStorage.setItem("score", score);
+  } else {
+    questionElement.textContent = question.text;
+    renderAnswers();
   }
-    else
-    {
-      questionElement.textContent = question.text;
-      renderAnswers();
-    }
-
 }
 
-//DONE
+//this function is how much time the user has to finish the quiz//
 function quizCounter() {
   quizTimerContainer.style.display = "block";
 
-  var quizCounter = setInterval(function () {
+  var quizCounterInterval = setInterval(function () {
     quizText.textContent = quizValue + " seconds left in quiz.";
     quizValue--;
 
-    //if statement makes it when countdown is at 0 it clears it and removes the countdown container from the screen.
+    //if statement makes it when countdown is at 0 it clears it and removes the countdown container from the screen. it then calls function quizFinished to start//
     if (quizValue < 0) {
-      clearInterval(quizCounter);
-      quizTimerContainer.style.display = "none";
-      //YOU WILL DISPLAY SCORE CARD IF SUBJECT HAS NOT FINIHSED HERE NEED TO FINISH THIS PART OF THE CODE LATER ONCE WE HAVE THE SCORE CARD DONE//
+      clearInterval(quizCounterInterval);
+      quizFinished();
     }
   }, 1000); //this is by every second//
 }
 
-//need to figure out why display is hidden and not coming out.//
 function quizFinished() {
-  //scorecard goes in here!!!
+  
   questionElement.style.display = "none";
-  answerElement.style.display = 'none';
-  quizTimerContainer.style.display = 'none';
-  questionsContainer.style.display = 'none';
+  answerElement.style.display = "none";
+  quizTimerContainer.style.display = "none";
+  questionsContainer.style.display = "none";
 
-  formContainer.style.display = 'block';
-  formElement.style.display = 'block';
+  formElement.style.display = "block";
+  input.style.display = "block";
+  enterButton.style.display = "block";
 
-  var results = formElement.textContent;
-  results = "GOOD JOB ON FINISHING!!!"
+  localStorage.getItem("score");
+  formElement.textContent =
+    "Your score is: " + score + "! Please enter your initals.";
+
+  addInfo(); //run a function to add the click event to button//
 }
 
 function checkAnswer(selectedAnswer) {
   let question = questions[index];
   if (selectedAnswer === question.choices[question.correctAnswer]) {
-    score += 5;
-    //console.log(score);
     console.log("Correct Answer!");
+    score += 15;
   } else {
-    score -= 5;
-    quizValue -= 30;
-    //console.log(score);
+    quizValue -= 20;
     console.log("Wrong Answer!");
   }
   index++;
   generateQuestion();
+}
+
+function addInfo() {
+  enterButton.addEventListener("click", function () {
+    var initials = input.value;
+    localStorage.setItem("initials", initials);
+
+    if (formElement.style.display !== "none") {
+      formElement.style.display = "none";
+      input.style.display = "none";
+      enterButton.style.display = "none";
+      scorecard();
+    }
+  });
+}
+
+function scorecard() {
+  leaderboard.style.display = "block";
+
+  var initials = localStorage.getItem("initials");
+  var score = localStorage.getItem("score");
+
+  var scorecardText = "initials: " + initials + " score : " + score;
+  results.textContent = scorecardText;
+
+  restartButton.addEventListener("click", function () {
+    score = 0;
+    index = 0;
+    quizValue = 90;
+
+    leaderboard.style.display = "none";
+    messageToStart.style.display = "block";
+    startButtonContainer.style.display = "flex";
+
+    startQuiz();
+  });
+
+  eraseButton.addEventListener("click", function () {
+    localStorage.clear();
+
+    results.textContent = "";
+
+    score = 0;
+  });
 }
