@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Assets/CSS/style.css">
-    <title>POP-QUIZ</title> <!--title of the website-->
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Assets/CSS/style.css" />
+    <title>POP-QUIZ</title>
+    <!--title of the website-->
+  </head>
 
-
-<body>
+  <body>
     <!--header of the document-->
     <header>
-    <h1>POP-QUIZ!</h1>
-    <div id="quizTimerContainer">
-    <p id="messageToStart">Click the Start button below to begin.</p>
-    <p id="quizText"><span id="quizValue"></span></p>
-    </div>
+      <h1>POP-QUIZ!</h1>
+      <div id="quizTimerContainer">
+        <p id="messageToStart">Click the Start button below to begin.</p>
+        <p id="quizText"><span id="quizValue"></span></p>
+      </div>
     </header>
 
     <!--blank section to provide space between the header and button-->
-    <section>
-    </section>
+    <div id="formContainer" class="center-container">
+      <p id="formElement"></p>
+      <input
+        id="input"
+        type="text"
+        name="Initials"
+        placeholder="enter Initials..."
+      />
+      <button id="enterButton">Enter</button>
+    </div>
 
     <!--start button id's-->
     <div id="startButtonContainer">
-    <button id="startButton">START</button>
+      <button id="startButton">START</button>
     </div>
-    
+
     <!--countdown timer for quiz-->
     <div id="countdownContainer">
-    <p id="countdownText"><span id="countdownValue">10</span></p>
+      <p id="countdownText"><span id="countdownValue">10</span></p>
     </div>
 
     <!--questions to put up on the screen when called upon, just put this up so we can use it later-->
     <div id="questionsContainer">
-    <p id="questionElement"></p>
-    <p id="answerElement"></p>
+      <p id="questionElement"></p>
+      <p id="answerElement"></p>
     </div>
-
-    <div id="formContainer">
-    <p id="formElement"></p>
-    <p></p>
+    <!--scoreboard at the end of the quiz-->
+    <div id="leaderboard">
+      <p id="results"></p>
+      <button id="erase">Erase</button>
+      <button id="restart">Restart</button>
     </div>
 
     <!--bringing in the javascript for the html to find-->
     <script src="./Assets/JS/script.js"></script>
-
-</body>
+  </body>
 </html>
